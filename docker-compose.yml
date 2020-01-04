@@ -1,0 +1,13 @@
+version: '3.4'
+services:
+  mp4rot:
+    restart: always
+    build: .
+    image: mp4rot
+    container_name: mp4rot
+    ports:
+      - "4567:4567"
+    volumes:
+     - /share/share/media/tools/mp4rot/app:/home/mp4rot/app
+     - /share/share/media/movie:/home/mp4rot/app/movie
+    command: bundle exec ruby /home/mp4rot/app/start.rb

@@ -1,0 +1,23 @@
+%h3 Movie files in #{@top}/#{@entry}
+%p
+%table
+  %tr
+  %td
+    %a(href="#{File.dirname('/view/'+@entry)}") Up
+  - @files.each do |file|
+    %tr
+      - full_path = [@top.force_encoding("utf-8"), @entry.force_encoding("utf-8"), file.force_encoding("utf-8")].join('/')
+      - if File.directory?(full_path)
+        %td
+          %a(href="/view/#{@entry}/#{file}") #{file}
+      - if file[/\.(mp4)$/i]
+        %td
+          %a(href="/view/#{@entry}/#{file}") #{file}
+        %td
+          %img(src="/thumb/#{@entry}/#{file}" width="150")
+        %td
+          %a(href="/conv/#{@entry}/#{file}\?rotation=-90") -90
+          %a(href="/conv/#{@entry}/#{file}\?rotation=0") 0
+          %a(href="/conv/#{@entry}/#{file}\?rotation=90") 90
+          %a(href="/conv/#{@entry}/#{file}\?rotation=180") 180
+
